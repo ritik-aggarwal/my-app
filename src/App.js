@@ -6,17 +6,18 @@ export default class App extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this.state = { description: '' };
+    this.state = { uname: '', pswd: '' };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onChange(e) {
+  onFormChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      uname: e.target.value,
     });
+    console.log("Value: " + e.target.value);
   }
 
-  onSubmit(e) {
+  onFormSubmit(e) {
     e.preventDefault();
 
     fetch(this.props.formAction, {
@@ -24,10 +25,10 @@ export default class App extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({description: this.state.description})
+      body: JSON.stringify({uname: this.state.uname})
     });
 
-    this.setState({description: ''});
+    this.setState({uname: ''});
   }
 
   render() {
@@ -37,14 +38,16 @@ export default class App extends Component {
           id="main-login"
           action={this.props.action}
           method={this.props.method}
-          onSubmit={this.onSubmit}>
+          onSubmit={this.onFormSubmit}>
             <h2>Login Page</h2>
             <div className="container">
               <label><b>Username</b></label><br></br>
-              <input type="text" placeholder="Enter Username" required></input><br></br>
+              <input type="text" placeholder="Enter Username"
+              onChange={this.onFormChange}></input><br></br>
 
               <label><b>Password</b></label><br></br>
-              <input type="password" placeholder="Enter Password" required></input><br></br>
+              <input type="password" placeholder="Enter Password"
+               onChange={this.onFormChange}></input><br></br>
 
               <button type="submit">Login</button>
             </div>
@@ -64,5 +67,3 @@ App.defaultProps = {
   action: 'http://api.brime.ml/user/login',
   method: 'post'
 };
-
-//module.exports = App;
