@@ -8,28 +8,29 @@ export default class App extends Component {
     super(props, context);
     this.state = { uname: '', pswd: '' };
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onFormChange = this.onFormChange.bind(this);
   }
 
   onFormChange(e) {
     this.setState({
-      uname: e.target.value,
+      [e.target.name]: e.target.value,
     });
-    console.log("Value: " + e.target.value);
+    //console.log("Value: " + e.target.value);
   }
 
   onFormSubmit(e) {
     e.preventDefault();
 
-    fetch(this.props.formAction, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({uname: this.state.uname})
-    });
-
-    this.setState({uname: ''});
-  }
+  //   fetch(this.props.formAction, {
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({uname: this.state.uname, pswd: this.state.pswd})
+  //   });
+  //
+  //   this.setState({uname: '', pswd: ''});
+   }
 
   render() {
     return (
@@ -41,13 +42,13 @@ export default class App extends Component {
           onSubmit={this.onFormSubmit}>
             <h2>Login Page</h2>
             <div className="container">
-              <label><b>Username</b></label><br></br>
-              <input type="text" placeholder="Enter Username"
-              onChange={this.onFormChange}></input><br></br>
+              <label><b>Username</b></label><br/>
+              <input type="text" placeholder="Enter Username" name="uname"
+              onChange={this.onFormChange}/><br/>
 
-              <label><b>Password</b></label><br></br>
-              <input type="password" placeholder="Enter Password"
-               onChange={this.onFormChange}></input><br></br>
+              <label><b>Password</b></label><br/>
+              <input type="password" placeholder="Enter Password" name="pswd"
+               onChange={this.onFormChange}/><br/>
 
               <button type="submit">Login</button>
             </div>
