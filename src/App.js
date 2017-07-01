@@ -19,7 +19,7 @@ export default class App extends Component {
   }
 
   onFormSubmit(e) {
-    e.preventDefault();
+  // e.preventDefault();
 
   //   fetch(this.props.formAction, {
   //     headers: {
