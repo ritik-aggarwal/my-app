@@ -1,16 +1,44 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 //import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { description: '' };
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    fetch(this.props.formAction, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({description: this.state.description})
+    });
+
+    this.setState({description: ''});
+  }
+
   render() {
     return (
-      <div className="form">
-        <form action="">
-          <div className="App">
+      <div className="App">
+        <form
+          id="main-login"
+          action={this.props.action}
+          method={this.props.method}
+          onSubmit={this.onSubmit}>
             <h2>Login Page</h2>
-
-
             <div className="container">
               <label><b>Username</b></label><br></br>
               <input type="text" placeholder="Enter Username" required></input><br></br>
@@ -26,14 +54,15 @@ class App extends Component {
               New User? <a href="">Create account.</a>
             </div>
 
-          </div>
         </form>
-        <div className="container">
-          {this.props.children}
-        </div>
       </div>
     );
   }
 }
 
-export default App;
+App.defaultProps = {
+  action: 'http://api.brime.ml/user/login',
+  method: 'post'
+};
+
+//module.exports = App;
