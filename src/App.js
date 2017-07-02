@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 //import logo from './logo.svg';
 import './App.css';
-
+import axios from 'axios'
 export default class App extends Component {
 
   constructor(props, context) {
@@ -19,22 +19,36 @@ export default class App extends Component {
   }
 
   onFormSubmit(e) {
-<<<<<<< HEAD
-  //  e.preventDefault();
-=======
   // e.preventDefault();
->>>>>>> 3630a19b5022291954b937d0d1dc0c0f9b929387
 
-    fetch(this.props.formAction, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({uname: this.state.uname, pswd: this.state.pswd})
-    });
+    // fetch(this.props.formAction, {
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({uname: this.state.uname, pswd: this.state.pswd})
+    // });
+    //
+    // this.setState({uname: '', pswd: ''});
+    //componentDidMount(){
 
-    this.setState({uname: '', pswd: ''});
-   }
+        var url = "http://api.brime.ml/user/login";
+        var config = {};
+        config.headers = {
+            'Accept': 'application/json',
+            "Content-Type" : "application/json"
+        };
+
+        axios.get(url, config).then(
+            function(response){
+                console.log(response);
+
+                JSON.stringify({uname: this.state.uname, pswd: this.state.pswd})
+                //var events = response.data;
+                this.setState({uname: '', pswd: ''});
+            }.bind(this))
+    }
+
 
   render() {
     return (
@@ -68,7 +82,7 @@ export default class App extends Component {
   }
 }
 
-App.defaultProps = {
-  action: 'http://api.brime.ml/user/login',
-//  method: 'post'
-};
+ App.defaultProps = {
+   action: 'http://api.brime.ml/user/login',
+//   method: 'get'
+ };
