@@ -19,17 +19,17 @@ export default class App extends Component {
   }
 
   onFormSubmit(e) {
-    e.preventDefault();
+  //  e.preventDefault();
 
-  //   fetch(this.props.formAction, {
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({uname: this.state.uname, pswd: this.state.pswd})
-  //   });
-  //
-  //   this.setState({uname: '', pswd: ''});
+    fetch(this.props.formAction, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({uname: this.state.uname, pswd: this.state.pswd})
+    });
+
+    this.setState({uname: '', pswd: ''});
    }
 
   render() {
@@ -44,11 +44,11 @@ export default class App extends Component {
             <div className="container">
               <label><b>Username</b></label><br/>
               <input type="text" placeholder="Enter Username" name="uname"
-              onChange={this.onFormChange}/><br/>
+              required onChange={this.onFormChange}/><br/>
 
               <label><b>Password</b></label><br/>
               <input type="password" placeholder="Enter Password" name="pswd"
-               onChange={this.onFormChange}/><br/>
+               required onChange={this.onFormChange}/><br/>
 
               <button type="submit">Login</button>
             </div>
@@ -66,5 +66,5 @@ export default class App extends Component {
 
 App.defaultProps = {
   action: 'http://api.brime.ml/user/login',
-  method: 'post'
+//  method: 'post'
 };
