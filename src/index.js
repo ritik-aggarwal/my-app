@@ -9,10 +9,6 @@ import {
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <Router>
-    <div>
-      <Route exact path="/login" component={App}/>
-    </div>
-  </Router>
+  <App />
   , document.getElementById('root'));
   registerServiceWorker();
