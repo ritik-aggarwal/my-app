@@ -24,22 +24,48 @@
   padding-top: 30px;
   }
 
+#login_heading {
+  font-size: 45px;
+  font-family: "Arial";
+  color: #fb6737;
+}
+
+#login_content {
+  font-size: 20px;
+  font-family: "Arial";
+  color: #fb6737;
+}
+
 input[type=text], input[type=password], input[type=email] {
-    width: 50%;
+    width: 20%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 10px;
+    border: none;
+    border-bottom:solid #fb6737 1px;
+    outline: none;
+    text-align: center;
+
 }
-input[type=text]:hover, input[type=password]:hover {
+input[type=text]:hover, input[type=password]:hover, input[type=email]:hover  {
   opacity: 0.8;
-  box-shadow: 1px 1px 0.5px #888888;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #888888;
 }
 
+input:focus {
+  border-bottom:solid #fb6737 2px;
+}
+
+input::placeholder {
+  font-size: 16px;
+  font-family: "sans-serif";
+  opacity: 0.8;
+  text-align: center;
+  }
+
 button {
-    background-color: #4CAF50;
+    /*background-color: #fb6737;*/
+    background: -webkit-linear-gradient(right, #fd972d , #f94841);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -47,6 +73,7 @@ button {
     cursor: pointer;
     width: 20%;
     border-radius: 5px;
+    font-size: 15px;
 }
 
 button:hover {
