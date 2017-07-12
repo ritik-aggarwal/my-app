@@ -4,11 +4,12 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
-
+import {requireAuth} from "./pages/Login";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Reset from "./pages/Reset";
+import Dash from "./pages/Dash";
 import Footer from "./components/Footer";
 
 export default class App extends Component {
@@ -21,6 +22,7 @@ export default class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/reset" component={Reset} />
+            <Route path="/dash" component={Dash} onEnter={requireAuth}/>
           </div>
         </Router>
         <Footer/>

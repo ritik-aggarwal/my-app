@@ -1,10 +1,11 @@
 import React from "react";
 import { Link,
-  //BrowserRouter as Router,
+  BrowserRouter as Router,
 } from 'react-router-dom';
 import axios from 'axios'
 import $ from 'jquery'
 import '../App.css';
+import Dash from "./Dash"
 
 export default class Login extends React.Component {
 
@@ -39,7 +40,9 @@ export default class Login extends React.Component {
       })
       .then(function (response) {
         console.log(response);
+        requireAuth(Dash, Login, response);
       })
+
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data);
@@ -47,13 +50,16 @@ export default class Login extends React.Component {
           console.log(error.response.headers);
         }
       });
-    // .then(response => {
-    //   // Successful login, redirect to /upload
-    //   Router.push('/signin');
-    //
-    // })
+
+      export function requireAuth(nextState, replaceState, res) {
+        if (res.data.status !== "success")
+        replaceState({
+          nextPathname: nextState.location.pathname }, '/login')
+      }
+
 
       this.setState({ uid: '', password: '' });
+
     }
 
     render() {
@@ -89,5 +95,5 @@ export default class Login extends React.Component {
 }
 
 Login.defaultProps = {
-      action: 'http://brime.ml/user/login',
-     };
+  action: 'http://brime.ml/user/login',
+};
