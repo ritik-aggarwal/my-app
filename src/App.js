@@ -4,13 +4,15 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
-import {requireAuth} from "./pages/Login";
+//import {requireAuth} from "./pages/Login";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Reset from "./pages/Reset";
 import Dash from "./pages/Dash";
 import Footer from "./components/Footer";
+import PrivateRoute from "./pages/Auth";
+var requireAuth = require("./pages/Login")
 
 export default class App extends Component {
   render() {
@@ -28,5 +30,14 @@ export default class App extends Component {
         <Footer/>
       </div>
     );
+  }
+
+
+  function requireAuth(nextState, replace) {
+  if (!sessionStorage.jwt) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
   }
 }
